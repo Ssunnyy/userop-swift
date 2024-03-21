@@ -31,7 +31,7 @@ public class SimpleAccountBuilder: UserOperationBuilder {
     private let provider: JsonRpcProvider
     private let entryPoint: EntryPoint
     private let factory: SimpleAccountFactory
-    private let proxy: SimpleAccount
+    public let proxy: SimpleAccount
 
     public init(signer: Signer,
                 rpcUrl: URL,

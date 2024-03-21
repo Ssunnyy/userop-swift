@@ -16,7 +16,7 @@ public protocol ISimpleAccount {
 public class SimpleAccount: ISimpleAccount {
     public var web3: Web3
     public var address: EthereumAddress
-    public let contract: EthereumContract
+    public var contract: EthereumContract
 
     init(web3: Web3, address: EthereumAddress) {
         self.web3 = web3
