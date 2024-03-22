@@ -10,8 +10,8 @@ import Foundation
 import Web3Core
 
 let defaultVerificationGasLimit = BigUInt(70000)
-let defaultCallGasLimit = BigUInt(35000)
-let defaultPreVerificationGas = BigUInt(21000)
+let defaultCallGasLimit = BigUInt(40000)
+let defaultPreVerificationGas = BigUInt(4500000000)
 
 /// UserOperation Entity
 public struct UserOperation: Encodable {
