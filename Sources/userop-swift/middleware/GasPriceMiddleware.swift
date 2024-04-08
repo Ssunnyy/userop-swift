@@ -1,6 +1,6 @@
 //
 //  GasPriceMiddleware.swift
-//  
+//
 //
 //  Created by liugang zhang on 2023/8/23.
 //
@@ -36,7 +36,11 @@ public struct GasPriceMiddleware: UserOperationMiddleware {
         let block: Block = try await provider.send(.getBlockByNumber(.latest, false)).result
 
         let buffer = fee / 100 * 13
-        let maxPriorityFeePerGas = fee + buffer
+        var maxPriorityFeePerGas = fee + buffer
+        if  maxPriorityFeePerGas < BigUInt(1500000000) {
+        maxPriorityFeePerGas = BigUInt(1500000000)
+    }
+        
         let maxFeePerGas = block.baseFeePerGas != nil ? block.baseFeePerGas! * 2 + maxPriorityFeePerGas : maxPriorityFeePerGas
         return (maxFeePerGas, maxPriorityFeePerGas)
     }
@@ -46,3 +50,4 @@ public struct GasPriceMiddleware: UserOperationMiddleware {
         return (gas, gas)
     }
 }
+
