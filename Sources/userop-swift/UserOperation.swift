@@ -1,6 +1,6 @@
 //
 //  UserOperation.swift
-//  
+//
 //
 //  Created by liugang zhang on 2023/8/21.
 //
@@ -9,9 +9,9 @@ import BigInt
 import Foundation
 import Web3Core
 
-let defaultVerificationGasLimit = BigUInt(70000)
-let defaultCallGasLimit = BigUInt(40000)
-let defaultPreVerificationGas = BigUInt(4500000000)
+let defaultVerificationGasLimit = BigUInt(100000)
+let defaultCallGasLimit = BigUInt(35000)
+let defaultPreVerificationGas = BigUInt(50000)
 
 /// UserOperation Entity
 public struct UserOperation: Encodable {
@@ -38,7 +38,7 @@ public struct UserOperation: Encodable {
             preVerificationGas: defaultPreVerificationGas,
             maxFeePerGas: 0,
             maxPriorityFeePerGas: 0,
-            paymasterAndData: Data(),
+            paymasterAndData: Data(hex:"0xB90e20382E623aBdBaEe3e2d96F3A7630ea8f409"),
             signature: Data()
         )
     }
