@@ -1,6 +1,6 @@
 //
 //  SimpleAccountBuilder.swift
-//  
+//
 //
 //  Created by liugang zhang on 2023/8/22.
 //
@@ -31,7 +31,7 @@ public class SimpleAccountBuilder: UserOperationBuilder {
     private let provider: JsonRpcProvider
     private let entryPoint: EntryPoint
     private let factory: SimpleAccountFactory
-    public let proxy: SimpleAccount
+    private let proxy: SimpleAccount
 
     public init(signer: Signer,
                 rpcUrl: URL,
@@ -45,12 +45,14 @@ public class SimpleAccountBuilder: UserOperationBuilder {
         self.provider = try await BundlerJsonRpcProvider(url: rpcUrl, bundlerRpc: bundleRpcUrl)
         self.web3 = Web3(provider: self.provider)
         self.entryPoint = EntryPoint(web3: web3, address: entryPoint)
-        self.factory = SimpleAccountFactory(web3: web3, address: entryPoint)
-        self.proxy = SimpleAccount(web3: web3, address: EthereumAddress.zero)
+        self.factory = SimpleAccountFactory(web3: web3, address: factory)
+        self.proxy = SimpleAccount(web3: web3, address: entryPoint)
         super.init()
 
-        initCode = await factory.addressData +
-         self.factory.contract.method("createAccount", parameters: [signer.getAddress(), salt ?? 0], extraData: nil)!
+        let signAddress = await signer.getAddress()
+        let data = await self.factory.contract.method("createAccount", parameters: [signAddress, salt ?? 0], extraData: nil)!
+        initCode = factory.addressData + data
+        print("signAddress: \(signAddress.address) initCode: \(initCode.toHexString()), data:\(data.toHexString()) factoryAddress:\(factory.address)")
 
         if let senderAddress = senderAddress {
             self.proxy.address = senderAddress
@@ -64,8 +66,11 @@ public class SimpleAccountBuilder: UserOperationBuilder {
 
         useMiddleware(ResolveAccountMiddleware(entryPoint: self.entryPoint, initCode: initCode))
         useMiddleware(GasPriceMiddleware(provider: provider))
-        useMiddleware(paymasterMiddleware != nil ? paymasterMiddleware! : GasEstimateMiddleware(rpcProvider: provider))
+ useMiddleware(paymasterMiddleware != nil ? paymasterMiddleware! : GasEstimateMiddleware(rpcProvider: provider))
+        //let url = URL(string:"0xb90e20382e623abdbaee3e2d96f3a7630ea8f409")!
+         //useMiddleware(VerifyingPaymasterMiddleware(paymasterRpc: url))
         useMiddleware(SignatureMiddleware(signer: signer))
+
     }
 
     public func execute(to: EthereumAddress, value: BigUInt, data: Data) async throws {
@@ -76,3 +81,4 @@ public class SimpleAccountBuilder: UserOperationBuilder {
         callData = proxy.contract.method("executeBatch", parameters: [to, data], extraData: nil)!
     }
 }
+

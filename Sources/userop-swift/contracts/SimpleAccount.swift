@@ -1,6 +1,6 @@
 //
 //  SimpleAccount.swift
-//  
+//
 //
 //  Created by liugang zhang on 2023/8/23.
 //
@@ -16,11 +16,12 @@ public protocol ISimpleAccount {
 public class SimpleAccount: ISimpleAccount {
     public var web3: Web3
     public var address: EthereumAddress
-    public var contract: EthereumContract
+    public let contract: EthereumContract
 
     init(web3: Web3, address: EthereumAddress) {
         self.web3 = web3
         self.address = address
-        self.contract = try! EthereumContract(Abi.integalAccount, at: address)
+        self.contract = try! EthereumContract(Abi.simpleAccount, at: address)
     }
 }
+
