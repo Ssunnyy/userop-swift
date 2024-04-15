@@ -7,12 +7,12 @@ Pod::Spec.new do |spec|
     spec.summary      = 'swift version of https://github.com/stackup-wallet/userop.js'
     spec.homepage     = 'https://github.com/shengjiehou123/userop-swift'
     spec.author       = { 'sunny' => 'sm812a@gmail.com' }
-    spec.source       = { :git => 'https://github.com/Ssunnyy/userop-swift', :tag => spec.version.to_s }
+    spec.source       = { :git => 'https://github.com/Ssunnyy/userop-swift.git', :tag => spec.version.to_s }
     spec.swift_version = '5.8'
 
     spec.source_files =  "Sources/userop-swift/**/*.swift"
     spec.frameworks = 'Foundation'
 
-    spec.dependency 'Web3Core'
-    spec.dependency 'web3swift'
+    #spec.dependency 'Web3Core'
+    spec.dependency 'web3swift', 'https://github.com/Ssunnys/web3_swift.git'
 end
