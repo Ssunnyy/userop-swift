@@ -6,8 +6,8 @@ Pod::Spec.new do |spec|
     spec.license      = { :type => 'MIT License', :file => 'LICENSE.md' }
     spec.summary      = 'swift version of https://github.com/stackup-wallet/userop.js'
     spec.homepage     = 'https://github.com/shengjiehou123/userop-swift'
-    spec.author       = { 'jack' => 'shengjiehou123@gmail.com' }
-    spec.source       = { :git => 'https://github.com/shengjiehou123/userop-swift.git', :tag => spec.version.to_s }
+    spec.author       = { 'sunny' => 'sm812a@gmail.com' }
+    spec.source       = { :git => 'https://github.com/Ssunnyy/userop-swift', :tag => spec.version.to_s }
     spec.swift_version = '5.8'
 
     spec.source_files =  "Sources/userop-swift/**/*.swift"
