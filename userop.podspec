@@ -14,5 +14,5 @@ Pod::Spec.new do |spec|
     spec.frameworks = 'Foundation'
 
     #spec.dependency 'Web3Core'
-    spec.dependency 'web3swift', 'https://github.com/Ssunnys/web3_swift.git'
+    spec.dependency 'web3swift', :git=>'https://github.com/Ssunnys/web3_swift.git'
 end
