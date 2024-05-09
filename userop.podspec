@@ -13,6 +13,8 @@ Pod::Spec.new do |spec|
     spec.source_files =  "Sources/userop-swift/**/*.swift"
     spec.frameworks = 'Foundation'
 
-    #spec.dependency 'Web3Core'
-    spec.dependency 'web3swift', :git=>'https://github.com/Ssunnys/web3_swift.git'
+    spec.dependency 'Web3Core'
+    spec.dependency 'web3swift'
+    spec.dependency 'BigInt'
+
 end

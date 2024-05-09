@@ -15,7 +15,7 @@ let package = Package(
             targets: ["userop-swift"])
     ],
     dependencies: [
-        .package(url: "https://github.com/attaswift/BigInt.git", from: "3.1.0"),
+        .package(url: "https://github.com/attaswift/BigInt.git", from: "5.2.0"),
         .package(url: "https://github.com/zhangliugang/web3swift.git", branch: "userop")
 //        .package(path: "../../web3swift")
     ],
